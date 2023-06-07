@@ -1,0 +1,18 @@
+{% extends "layout.html" %} {% block content %} {% for character in characters
+%}
+<h1>{{character.name}}</h1>
+<p>{{character.age}}</p>
+<p>{{character.catch_phrase}}</p>
+{% endfor %}
+
+<form method="POST" action="">
+  {{form.hidden_tag()}}
+  <fieldset>
+    <legend>Create a Friends Character</legend>
+    <div>{{form.name.label}} {{form.name}}</div>
+    <div>{{form.age.label}} {{form.age}}</div>
+    <div>{{form.catch_phrase.label}} {{form.catch_phrase}}</div>
+    <div>{{form.submit}}</div>
+  </fieldset>
+</form>
+{% endblock content %}
