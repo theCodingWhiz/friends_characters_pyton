@@ -3,6 +3,7 @@ from application.models import FriendsCharacter
 from flask import request, jsonify, render_template
 from application.forms import AddCharacterForm
 
+
 @app.route("/")
 def hello_world():
     return "<p>Hello, there!</p>"
