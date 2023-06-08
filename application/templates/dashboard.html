@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block content %} {% for character in character %}
+{% endfor %}
+
+<canvas id="myChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const names = [];
+  const ages = [];
+
+  {% for character in character %}
+    names.push("{{ character.name }}");
+    ages.push("{{ character.age }}");
+  {% endfor %}
+
+  const ctx = document.getElementById("myChart");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: names,
+      datasets: [
+        {
+          label: "Ages of Friends Characters",
+          data: ages,
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+</script>
+
+{% endblock content %}

@@ -3,6 +3,7 @@ from application.models import FriendsCharacter
 from flask import request, jsonify, render_template
 from application.forms import AddCharacterForm
 
+
 @app.route("/")
 def hello_world():
     return "<p>Hello, there!</p>"
@@ -66,4 +67,26 @@ def update_character(id):
 
     updatedCharacter = FriendsCharacter.query.get(id)
     return jsonify(id=updatedCharacter.id, name=updatedCharacter.name, age=updatedCharacter.age, catch_phrase=updatedCharacter.catch_phrase)
-ç
+
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    character = FriendsCharacter.query.all()
+    character_list = []
+    for characters in character:
+        character_list.append(format_character(characters))
+    return render_template('dashboard.html', character=character_list )
+
+@app.route('/dashboard/<id>', methods=['GET'])
+def dashboard_character(id):
+    character = FriendsCharacter.query.filter_by(id=id).first()
+    return render_template('dashboard_character.html', character=format_character(character) )
+
+@app.route('/dashboard/<id>', methods=['DELETE'])
+def dashboard_delete_character(id):
+    character = FriendsCharacter.query.filter_by(id=id).first()
+    db.session.delete(character)
+    db.session.commit()
+    return 'Character Deleted'
+
+
+
