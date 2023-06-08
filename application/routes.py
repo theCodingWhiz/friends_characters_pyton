@@ -66,4 +66,3 @@ def update_character(id):
 
     updatedCharacter = FriendsCharacter.query.get(id)
     return jsonify(id=updatedCharacter.id, name=updatedCharacter.name, age=updatedCharacter.age, catch_phrase=updatedCharacter.catch_phrase)
-ç
